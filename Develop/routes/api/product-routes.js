@@ -22,9 +22,10 @@ router.get('/', (req, res) => {
     attributes: ['tag_name']
   }]
   })
+});
   // find all products
   // be sure to include its associated Category and Tag data
-});
+
 
 // get one product
 router.get('/:id', (req, res) => {
@@ -48,12 +49,19 @@ router.get('/:id', (req, res) => {
       attributes: ['tag_name']
   }]
   })
+});
   // find a single product by its `id`
   // be sure to include its associated Category and Tag data
-});
+
 
 // create new product
 router.post('/', (req, res) => {
+  Product.create ({
+    product_name: 'Pants',
+    price: 50.00,
+    stock: 8,
+    tagIds: [1, 2, 3, 4]
+  })
   /* req.body should look like this...
     {
       product_name: "Basketball",
@@ -127,6 +135,11 @@ router.put('/:id', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
+  Product.destroy ({
+    where: {
+      id: req.params.id
+    }
+  })
   // delete one product by its `id` value
 });
 
